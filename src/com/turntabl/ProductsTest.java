@@ -28,6 +28,8 @@ class ProductsTest {
         when(productPricingService.price(anyString(), anyString())).thenReturn(5.0);
         // future
         when(productPricingService.price(anyString(), anyString(), anyInt(), anyInt())).thenReturn(10.0);
+        // Option
+        when(productPricingService.price(anyString(), anyString(), anyInt())).thenReturn(2.0);
     }
 
     @Test
@@ -35,7 +37,7 @@ class ProductsTest {
         //add product to list
         parisTradedProductsImplementation.addNewProduct(product);
         //trade the product ie add to map
-        parisTradedProductsImplementation.trade(product, 4);
+        parisTradedProductsImplementation.trade(product, 15);
     }
 
     @Test
@@ -71,7 +73,11 @@ class ProductsTest {
         parisTradedProductsImplementation.addNewProduct(aFuture);
         parisTradedProductsImplementation.trade(aFuture, 5);
 
-        assertEquals(70.0, parisTradedProductsImplementation.totalValueOfDaysTradedProducts());
+        Products anOption = new Option("4", "EXE", "APB", 9, productPricingService);
+        parisTradedProductsImplementation.addNewProduct(anOption);
+        parisTradedProductsImplementation.trade(anOption, 30);
+
+        assertEquals(130.0, parisTradedProductsImplementation.totalValueOfDaysTradedProducts());
     }
 
 }

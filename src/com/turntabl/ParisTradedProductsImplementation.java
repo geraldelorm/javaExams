@@ -11,10 +11,10 @@ public class ParisTradedProductsImplementation implements ParisTradedProducts{
         Optional<Products> optionalProduct = this.listOfRegisteredProducts.stream()
                 .filter(p -> p.getProductId().equals(product.getProductId()))
                 .findFirst();
-        if (optionalProduct.isEmpty()) {
+        if (optionalProduct.isEmpty()) { // is an empty list is returned we know the product doesn't exist
             this.listOfRegisteredProducts.add(product);
         } else {
-            throw new ProductAlreadyRegisteredException("The product you are trying to add already exists");
+            throw new ProductAlreadyRegisteredException("The product you are trying to add, already exists");
         }
     }
 
