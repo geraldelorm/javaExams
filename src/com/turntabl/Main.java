@@ -9,6 +9,7 @@ public class Main {
 
         // The following where just simple implementations to help be understand the question
 
+        ///////////////////////////////////////////////////////////////////////////////
         Map<String, Integer> map = new HashMap<>();
 
         map.put("01", 91);
@@ -23,6 +24,7 @@ public class Main {
         System.out.println(map.values().stream().mapToInt(v -> v).sum()); //same result
         System.out.println(map.values().stream().reduce(0, (total, val) -> total + val)); // same result
         System.out.println(map.values().stream().reduce(0, Integer::sum)); // same result
+        //////////////////////////////////////////////////////////////////////////////////////////////////
 
         //Products products = new Stocks("0001", "EXE", "APPL", 500);
     }
