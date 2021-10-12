@@ -1,5 +1,6 @@
 package com.turntabl;
 
+//this ia a kind of product
 public class Futures extends Products {
     private String contractCode;
     private int month, year;

@@ -1,5 +1,6 @@
 package com.turntabl;
 
+//this ia a kind of product
 public class Option extends Products {
     private String ticker;
     private int validForDays;
