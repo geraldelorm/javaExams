@@ -1,13 +1,15 @@
-package com.turntabl;
+package com.turntabl.Products;
+
+import com.turntabl.ServicesAndLogic.ProductPricingService;
 
 //this ia a kind of product
-public class Futures extends Products {
+public class Future extends Products {
     private String contractCode;
     private int month, year;
 
     private final ProductPricingService productPricingService;
 
-    public Futures(String productId, String exchange, String contractCode, int month, int year, ProductPricingService productPricingService) {
+    public Future(String productId, String exchange, String contractCode, int month, int year, ProductPricingService productPricingService) {
         super(productId, exchange);
         this.contractCode = contractCode;
         this.month = month;

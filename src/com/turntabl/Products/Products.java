@@ -1,4 +1,4 @@
-package com.turntabl;
+package com.turntabl.Products;
 
 //This is an abstract class so that we can have "kinds of" products
 public abstract class Products {

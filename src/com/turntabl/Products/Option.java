@@ -1,4 +1,6 @@
-package com.turntabl;
+package com.turntabl.Products;
+
+import com.turntabl.ServicesAndLogic.ProductPricingService;
 
 //this ia a kind of product
 public class Option extends Products {

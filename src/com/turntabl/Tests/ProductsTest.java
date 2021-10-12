@@ -1,5 +1,12 @@
-package com.turntabl;
+package com.turntabl.Tests;
 
+import com.turntabl.Exceptions.ProductAlreadyRegisteredException;
+import com.turntabl.Products.Future;
+import com.turntabl.Products.Option;
+import com.turntabl.Products.Products;
+import com.turntabl.Products.Stock;
+import com.turntabl.ServicesAndLogic.ProductPricingService;
+import com.turntabl.ServicesAndLogic.ParisTradedProductsActions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,16 +16,16 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+//All the tests bellow where written first before implementation
 class ProductsTest {
-
     Products product;
     ProductPricingService productPricingService;
-    ParisTradedProductsImplementation parisTradedProductsImplementation;
+    ParisTradedProductsActions parisTradeAction;
 
     //This is run before each Test Case
     @BeforeEach
     void setup() {
-        parisTradedProductsImplementation = new ParisTradedProductsImplementation();
+        parisTradeAction = new ParisTradedProductsActions();
         product = mock(Products.class);
         when(product.getProductId()).thenReturn("1");
 
@@ -34,48 +41,48 @@ class ProductsTest {
     @Test
     public void productCanBeAddedToListAndDuplicateProductsThrowsException() throws ProductAlreadyRegisteredException {
         //add product
-        parisTradedProductsImplementation.addNewProduct(product);
+        parisTradeAction.addNewProduct(product);
         //exception due to adding again
-        assertThrows(ProductAlreadyRegisteredException.class, () -> parisTradedProductsImplementation.addNewProduct(product));
+        assertThrows(ProductAlreadyRegisteredException.class, () -> parisTradeAction.addNewProduct(product));
     }
 
     @Test
     public void productCanBeTradedAfterBeenAddedToListOfProducts() throws ProductAlreadyRegisteredException {
         //add product to list
-        parisTradedProductsImplementation.addNewProduct(product);
+        parisTradeAction.addNewProduct(product);
         //trade the product ie add to map
-        parisTradedProductsImplementation.trade(product, 15);
+        parisTradeAction.trade(product, 15);
     }
 
 
     @Test
     public void checkThatProductTradedQuantityIsValid() throws ProductAlreadyRegisteredException {
         //add and trade product
-        parisTradedProductsImplementation.addNewProduct(product);
-        parisTradedProductsImplementation.trade(product, 10);
+        parisTradeAction.addNewProduct(product);
+        parisTradeAction.trade(product, 10);
         //create add and trade another product
         Products newProduct = mock(Products.class);
-        parisTradedProductsImplementation.addNewProduct(newProduct);
-        parisTradedProductsImplementation.trade(newProduct, 30);
+        parisTradeAction.addNewProduct(newProduct);
+        parisTradeAction.trade(newProduct, 30);
 
-        assertEquals(40, parisTradedProductsImplementation.totalTradeQuantityForDay());
+        assertEquals(40, parisTradeAction.totalTradeQuantityForDay());
     }
 
     @Test
     public void totalValueOfDaysTradedProductsIsValid() throws ProductAlreadyRegisteredException {
-        Products aStock = new Stocks("1", "GGP", "EXE", productPricingService);
-        parisTradedProductsImplementation.addNewProduct(aStock);
-        parisTradedProductsImplementation.trade(aStock, 4);
+        Products aStock = new Stock("1", "GGP", "EXE", productPricingService);
+        parisTradeAction.addNewProduct(aStock);
+        parisTradeAction.trade(aStock, 4);
 
-        Products aFuture = new Futures("2", "GHA", "codeRed", 9, 16, productPricingService);
-        parisTradedProductsImplementation.addNewProduct(aFuture);
-        parisTradedProductsImplementation.trade(aFuture, 5);
+        Products aFuture = new Future("2", "GHA", "codeRed", 9, 16, productPricingService);
+        parisTradeAction.addNewProduct(aFuture);
+        parisTradeAction.trade(aFuture, 5);
 
         Products anOption = new Option("4", "EXE", "APB", 9, productPricingService);
-        parisTradedProductsImplementation.addNewProduct(anOption);
-        parisTradedProductsImplementation.trade(anOption, 30);
+        parisTradeAction.addNewProduct(anOption);
+        parisTradeAction.trade(anOption, 30);
 
-        assertEquals(130.0, parisTradedProductsImplementation.totalValueOfDaysTradedProducts());
+        assertEquals(130.0, parisTradeAction.totalValueOfDaysTradedProducts());
     }
 
 }

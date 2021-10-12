@@ -1,4 +1,4 @@
-package com.turntabl;
+package com.turntabl.ServicesAndLogic;
 
 public interface ProductPricingService {
     double price(String exchange, String ticker);

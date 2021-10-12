@@ -1,4 +1,7 @@
-package com.turntabl;
+package com.turntabl.ServicesAndLogic;
+
+import com.turntabl.Exceptions.ProductAlreadyRegisteredException;
+import com.turntabl.Products.Products;
 
 /**
  * Interface used to audit products that have been registered

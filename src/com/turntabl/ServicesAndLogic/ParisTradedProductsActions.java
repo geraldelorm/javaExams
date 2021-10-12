@@ -1,8 +1,11 @@
-package com.turntabl;
+package com.turntabl.ServicesAndLogic;
+
+import com.turntabl.Exceptions.ProductAlreadyRegisteredException;
+import com.turntabl.Products.Products;
 
 import java.util.*;
 
-public class ParisTradedProductsImplementation implements ParisTradedProducts{
+public class ParisTradedProductsActions implements ParisTradedProducts {
     private Map<Products, Integer> mapOfTradedProducts = new HashMap<>(); //for collecting trades
     private List<Products> listOfRegisteredProducts = new ArrayList<>(); //for collecting products
 

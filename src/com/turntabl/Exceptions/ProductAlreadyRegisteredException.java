@@ -1,4 +1,4 @@
-package com.turntabl;
+package com.turntabl.Exceptions;
 
 public class ProductAlreadyRegisteredException extends Exception{
     // To be able to pass in our own messages we need the constructor and getMessage Method
