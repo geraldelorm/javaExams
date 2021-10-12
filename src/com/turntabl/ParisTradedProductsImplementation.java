@@ -3,11 +3,12 @@ package com.turntabl;
 import java.util.*;
 
 public class ParisTradedProductsImplementation implements ParisTradedProducts{
-    private Map<Products, Integer> mapOfTradedProducts = new HashMap<>();
-    private List<Products> listOfRegisteredProducts = new ArrayList<>();
+    private Map<Products, Integer> mapOfTradedProducts = new HashMap<>(); //for collecting trades
+    private List<Products> listOfRegisteredProducts = new ArrayList<>(); //for collecting products
 
     @Override
     public void addNewProduct(Products product) throws ProductAlreadyRegisteredException {
+        //using optional here because the list can be empty after the stream operation
         Optional<Products> optionalProduct = this.listOfRegisteredProducts.stream()
                 .filter(p -> p.getProductId().equals(product.getProductId()))
                 .findFirst();
@@ -21,7 +22,6 @@ public class ParisTradedProductsImplementation implements ParisTradedProducts{
     @Override
     public void trade(Products product, int quantity) {
         // Exit if the product is not already added to the List
-
         if (listOfRegisteredProducts.contains(product)) {
             //if Product is already added we increase the quantity, but we need the existing quantity first
             if (mapOfTradedProducts.containsKey(product)) {
@@ -31,6 +31,8 @@ public class ParisTradedProductsImplementation implements ParisTradedProducts{
             } else {
                 mapOfTradedProducts.put(product, quantity);
             }
+        } else {
+            return;
         }
 
     }

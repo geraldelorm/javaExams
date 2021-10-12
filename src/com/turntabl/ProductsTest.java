@@ -3,8 +3,7 @@ package com.turntabl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -24,24 +23,16 @@ class ProductsTest {
         when(product.getProductId()).thenReturn("1");
 
         productPricingService = mock(ProductPricingService.class);
-        //stock
-        when(productPricingService.price(anyString(), anyString())).thenReturn(5.0);
-        // future
-        when(productPricingService.price(anyString(), anyString(), anyInt(), anyInt())).thenReturn(10.0);
-        // Option
+        // Option pricingService mock return
         when(productPricingService.price(anyString(), anyString(), anyInt())).thenReturn(2.0);
+        //stock pricingService mock return
+        when(productPricingService.price(anyString(), anyString())).thenReturn(5.0);
+        // future pricingService mock return
+        when(productPricingService.price(anyString(), anyString(), anyInt(), anyInt())).thenReturn(10.0);
     }
 
     @Test
-    public void productCanBeTraded() throws ProductAlreadyRegisteredException {
-        //add product to list
-        parisTradedProductsImplementation.addNewProduct(product);
-        //trade the product ie add to map
-        parisTradedProductsImplementation.trade(product, 15);
-    }
-
-    @Test
-    public void productCanBeAddedAndDuplicateProductThrowsException() throws ProductAlreadyRegisteredException {
+    public void productCanBeAddedToListAndDuplicateProductsThrowsException() throws ProductAlreadyRegisteredException {
         //add product
         parisTradedProductsImplementation.addNewProduct(product);
         //exception due to adding again
@@ -49,11 +40,19 @@ class ProductsTest {
     }
 
     @Test
-    public void productTradedQuantityIsValid() throws ProductAlreadyRegisteredException {
+    public void productCanBeTradedAfterBeenAddedToListOfProducts() throws ProductAlreadyRegisteredException {
+        //add product to list
+        parisTradedProductsImplementation.addNewProduct(product);
+        //trade the product ie add to map
+        parisTradedProductsImplementation.trade(product, 15);
+    }
+
+
+    @Test
+    public void checkThatProductTradedQuantityIsValid() throws ProductAlreadyRegisteredException {
         //add and trade product
         parisTradedProductsImplementation.addNewProduct(product);
         parisTradedProductsImplementation.trade(product, 10);
-
         //create add and trade another product
         Products newProduct = mock(Products.class);
         parisTradedProductsImplementation.addNewProduct(newProduct);
@@ -67,7 +66,6 @@ class ProductsTest {
         Products aStock = new Stocks("1", "GGP", "EXE", productPricingService);
         parisTradedProductsImplementation.addNewProduct(aStock);
         parisTradedProductsImplementation.trade(aStock, 4);
-
 
         Products aFuture = new Futures("2", "GHA", "codeRed", 9, 16, productPricingService);
         parisTradedProductsImplementation.addNewProduct(aFuture);
