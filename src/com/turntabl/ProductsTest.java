@@ -12,9 +12,9 @@ import static org.mockito.Mockito.when;
 
 class ProductsTest {
 
-    ParisTradedProductsImplementation parisTradedProductsImplementation;
     Products product;
     ProductPricingService productPricingService;
+    ParisTradedProductsImplementation parisTradedProductsImplementation;
 
     //This is run before each Test Case
     @BeforeEach
