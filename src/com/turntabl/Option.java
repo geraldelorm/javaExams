@@ -17,4 +17,7 @@ public class Option extends Products {
     public double getCurrentPrice() {
         return this.productPricingService.price(this.getExchange(), this.ticker, this.validForDays);
     }
+
+    //Getter and setters can be implemented latter, they are not needed now
+
 }

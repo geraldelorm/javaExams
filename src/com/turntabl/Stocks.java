@@ -16,4 +16,7 @@ public class Stocks extends Products {
     public double getCurrentPrice() {
         return this.productPricingService.price(this.getExchange(), this.ticker);
     }
+
+    //Getter and setters can be implemented latter, they are not needed now
+
 }

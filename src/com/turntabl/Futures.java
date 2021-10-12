@@ -18,4 +18,6 @@ public class Futures extends Products {
     public double getCurrentPrice() {
         return this.productPricingService.price(this.getExchange(), this.contractCode, this.month, this.year);
     }
+
+    //Getter and setters can be implemented latter, they are not needed now
 }
